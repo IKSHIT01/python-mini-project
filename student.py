@@ -1,19 +1,35 @@
-# Simple Student Management System
-
 students = {}
 
 def add_student():
     name = input("Enter name: ")
-    marks = input("Enter marks: ")
+    marks = int(input("Enter marks: "))
     students[name] = marks
-    print("Student added!")
+    print("Student added successfully!")
 
 def view_students():
-    for name, marks in students.items():
-        print(name, ":", marks)
+    if not students:
+        print("No records found")
+    else:
+        for name, marks in students.items():
+            print(f"{name} : {marks}")
+
+def search_student():
+    name = input("Enter name to search: ")
+    if name in students:
+        print(f"{name} found with marks {students[name]}")
+    else:
+        print("Student not found")
+
+def delete_student():
+    name = input("Enter name to delete: ")
+    if name in students:
+        del students[name]
+        print("Deleted successfully")
+    else:
+        print("Student not found")
 
 while True:
-    print("\n1. Add Student\n2. View Students\n3. Exit")
+    print("\n1. Add\n2. View\n3. Search\n4. Delete\n5. Exit")
     choice = input("Enter choice: ")
 
     if choice == '1':
@@ -21,6 +37,10 @@ while True:
     elif choice == '2':
         view_students()
     elif choice == '3':
+        search_student()
+    elif choice == '4':
+        delete_student()
+    elif choice == '5':
         break
     else:
         print("Invalid choice")
